@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <form action="contact.php" method="post">
+        <fieldset>
+          <legend>Registrasi</legend>
+          <div>
+            <label>Nama:</label>
+            <input type="text" name="nama" placeholder="Nama Lengkap ..." />
+          </div>
+          <div>
+            <label>Username:</label>
+            <input type="text" name="Username" placeholder="Username ..." />
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Your email ..." />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Password ...">
+          </div>
+          <div>
+            <label>jenis Kelamin:</label>
+            <label><input type="radio" name="Jenis_kelamin" value="Laki Laki"></label>
+            <label><input type="radio" name="Jenis_kelamin" value="Perempuan"></label>
+        </div>
+        <div>
+            <label>Agama</label>
+            <select name="agama">
+                <option value="islam">Islam</option>
+                <option value="kristen">Kristen</option>
+                <option value="hindu">Hindu</option>
+                <option value="budha">Budha</option>
+                <option value="tidak_ada">Tidak Ada Agama</option>
+            </select>
+        </div>
+        <div>
+            <label>Biografi</label>
+            <textarea name="biografi"></textarea>
+        </div>
+        <div>
+            <input type="submit" name="submit" value="daftar">
+        </div>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>

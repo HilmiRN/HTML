@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <tittle></tittle>
+  </head>
+  <body>
+    <h1>Belajar Membuat Form</h1>
+    <form>
+      <input type="text" name="Username" />
+      <input type="password" name="password" />
+      <input type="submit" />
+      <!-- atribut "name" berfungsi untuk menjadi kunci dan variable untuk dikirim ke server -->
+      <!-- atribut "type" berfungsi untuk menentukan apa yang mau dikirim -->
+    </form>
+    <hr />
+    <h1>Latihan Membuat Form Login</h1>
+    <form action="login.php" method="post">
+      <p>
+        <label>Username</label>
+        <input type="text" name="Username" placeholder="Username..." />
+      </p>
+      <p>
+        <label>Password</label>
+        <input type="Password" name="Password" placeholder="Password" />
+      </p>
+      <p>
+        <label><input type="checkbox" name="remember" value="remember">Remember me</label>
+      </p>
+      <p>
+        <input type="submit" name="submit" value="Login">
+      </p>
+    </form>
+  </body>
+</html>
