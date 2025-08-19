@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Maze Tebak Jalan</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    #maze {
+      display: grid;
+      gap: 2px;
+      margin: 20px auto;
+      width: max-content;
+    }
+    .cell {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #333;
+    }
+    .wall {
+      background: #333;
+    }
+    .player {
+      background: limegreen;
+    }
+    .goal {
+      background: gold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Maze Tebak Jalan</h1>
+  <p>Gunakan tombol panah untuk bergerak!</p>
+  <div id="maze"></div>
+  <div id="status"></div>
+
+  <script>
+    const levels = [
+      [
+        [0, 0, 0, 1, 0],
+        [1, 1, 0, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0],
+        [0, 0, 0, 1, 2]
+      ],
+      [
+        [0, 1, 0, 0, 0, 1],
+        [0, 1, 0, 1, 0, 1],
+        [0, 1, 0, 1, 0, 0],
+        [0, 0, 0, 1, 1, 0],
+        [1, 1, 0, 0, 1, 0],
+        [0, 0, 0, 1, 1, 2]
+      ]
+    ];
+
+    let currentLevel = 0;
+    let mazeLayout = levels[currentLevel];
+    let rows = mazeLayout.length;
+    let cols = mazeLayout[0].length;
+    let playerPos = { x: 0, y: 0 };
+
+    const maze = document.getElementById('maze');
+
+    function drawMaze() {
+      maze.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
+      maze.style.gridTemplateRows = `repeat(${rows}, 50px)`;
+
+      maze.innerHTML = '';
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          if (mazeLayout[y][x] === 1) cell.classList.add('wall');
+          if (mazeLayout[y][x] === 2) cell.classList.add('goal');
+          if (playerPos.x === x && playerPos.y === y) cell.classList.add('player');
+          maze.appendChild(cell);
+        }
+      }
+    }
+
+    function movePlayer(dx, dy) {
+      const newX = playerPos.x + dx;
+      const newY = playerPos.y + dy;
+
+      if (
+        newX >= 0 && newX < cols &&
+        newY >= 0 && newY < rows &&
+        mazeLayout[newY][newX] !== 1
+      ) {
+        playerPos.x = newX;
+        playerPos.y = newY;
+
+        if (mazeLayout[newY][newX] === 2) {
+          if (currentLevel < levels.length - 1) {
+            currentLevel++;
+            mazeLayout = levels[currentLevel];
+            rows = mazeLayout.length;
+            cols = mazeLayout[0].length;
+            playerPos = { x: 0, y: 0 };
+            document.getElementById('status').innerText = `Level ${currentLevel + 1} mulai!`;
+          } else {
+            document.getElementById('status').innerText = `Selamat! Semua level selesai!`;
+          }
+        }
+      }
+      drawMaze();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      switch (e.key) {
+        case 'ArrowUp': movePlayer(0, -1); break;
+        case 'ArrowDown': movePlayer(0, 1); break;
+        case 'ArrowLeft': movePlayer(-1, 0); break;
+        case 'ArrowRight': movePlayer(1, 0); break;
+      }
+    });
+
+    drawMaze();
+  </script>
+</body>
+</html>
